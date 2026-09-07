@@ -130,6 +130,7 @@ def main():
         
                 example = {
                     "messages": {
+                        "game": "TicTacToe",
                         "name": players[selected_player]['name'],
                         "state": players[selected_player]['state'][step],
                         "action_mask": players[selected_player]['mask'][step],
@@ -154,6 +155,7 @@ def main():
         features=Features(
             {
                 "messages": {
+                    "game": Value("string"),
                     "name": Value("string"),
                     "state": Value("string"),
                     "action_mask": Value("string"),
