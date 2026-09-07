@@ -15,6 +15,10 @@ video_out = cv2.VideoWriter(
 )
 
 for row in ds:
+    if row['messages']['reward'] == -1:
+        print("Game over detected. Stopping video generation.")
+        break  # Stop processing if the reward is -1 (game over)
+
     # Print the current agent's name
     print(f"State:\n{row['messages']['state']}")
     print(f"Action Mask:\n{row['messages']['action_mask']}")
