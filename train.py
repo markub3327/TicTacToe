@@ -112,7 +112,7 @@ def main():
                 if action is not None:
                     players[agent]['started'].append(False)
 
-            print(f"GameID {shard}: Finish player {selected_player} with reward {reward}")
+            print(f"GameID {shard}: Finish player {selected_player} with reward {players[selected_player]['reward'][-1]}")
 
             print(f"Total frames: {len(players[selected_player]['frames'])}")
             print(f"Total states: {len(players[selected_player]['state'])}")

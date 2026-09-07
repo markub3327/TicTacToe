@@ -10,7 +10,7 @@ ds = load_from_disk("./dataset/tictactoe")
 video_out = cv2.VideoWriter(
     filename=f"videos/tictactoe_{datetime.datetime.now().strftime('%d-%m-%Y_%H-%M-%S')}.mp4",
     fourcc=cv2.VideoWriter_fourcc(*'mp4v'),
-    fps=30,
+    fps=25,
     frameSize=(1000, 1000),
 )
 
@@ -23,6 +23,16 @@ for row in ds:
     frame = cv2.cvtColor(np.asarray(row['images']), cv2.COLOR_RGB2BGR)
 
     # Add text to the frame
+    cv2.putText(
+        frame,
+        f"Agent: {row['messages']['game']}",
+        (40, 70),
+        cv2.FONT_HERSHEY_DUPLEX,
+        0.8,
+        (234, 232, 233),
+        2,
+        cv2.LINE_AA,
+    )
     cv2.putText(
         frame,
         f"Agent: {row['messages']['name']}",
