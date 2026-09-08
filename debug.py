@@ -4,7 +4,7 @@ import numpy as np
 from datasets import load_from_disk
 
 # Load the dataset from disk
-ds = load_from_disk("./dataset/tictactoe")
+ds = load_from_disk("./dataset")
 
 # Create a video writer object to save the frames as a video
 video_out = cv2.VideoWriter(
