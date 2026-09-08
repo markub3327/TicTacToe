@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 def main():
     # Game rounds
-    NUM_GAMES = 1000
+    NUM_GAMES = 5000
 
     # Init environment
     env = tictactoe_v3.env(render_mode="rgb_array")
