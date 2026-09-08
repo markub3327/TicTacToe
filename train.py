@@ -181,9 +181,8 @@ def main():
     dataset.info.version = Version("1.0.0")
 
     # Save the dataset
-    ds_path = "/mnt/project/perun2601343/tictactoe/dataset"
     dataset.save_to_disk(
-        os.path.join(ds_path, "tictactoe"),
+        "/mnt/project/perun2601343/tictactoe/dataset",
         num_proc=cpus,
     )
 
