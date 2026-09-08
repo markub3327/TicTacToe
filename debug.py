@@ -29,7 +29,7 @@ for row in ds:
     # Add text to the frame
     cv2.putText(
         frame,
-        f"Agent: {row['messages']['game']}",
+        f"Game: {row['messages']['game']}",
         (40, 70),
         cv2.FONT_HERSHEY_DUPLEX,
         0.8,
