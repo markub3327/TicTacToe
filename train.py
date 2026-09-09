@@ -2,7 +2,7 @@ import random
 import numpy as np
 import os
 from pettingzoo.classic import tictactoe_v3
-from datasets import Dataset, Features, Value, Image, Version
+from datasets import Dataset, Features, Value, Image, Version, Sequence
 from tqdm import tqdm
 
 def main():
@@ -51,6 +51,7 @@ def main():
 
                 # Render the current frame
                 frame = env.render()
+                frame = np.asarray([frame], dtype=np.uint8)
                 players[agent]['frames'].append(frame)
 
                 # Is the game finished?
@@ -112,22 +113,9 @@ def main():
                 if action is not None:
                     players[agent]['started'].append(False)
 
-            print(f"GameID {shard}: Finish player {selected_player} with reward {players[selected_player]['reward'][-1]}")
-
-            print(f"Total frames: {len(players[selected_player]['frames'])}")
-            print(f"Total states: {len(players[selected_player]['state'])}")
-            print(f"Total action masks: {len(players[selected_player]['mask'])}")
-            print(f"Total actions: {len(players[selected_player]['action'])}")
-            print(f"Total rewards: {len(players[selected_player]['reward'])}")
-            print(f"Total terminations: {len(players[selected_player]['termination'])}")
-            print(f"Total truncations: {len(players[selected_player]['truncation'])}")
-            print(f"Total started: {len(players[selected_player]['started'])}")
-
             for step in range(
-                len(players[selected_player]['frames'])
+                len(players[selected_player]['state'])
             ):
-                print(f"Step {step}")
-        
                 example = {
                     "messages": {
                         "game": "TicTacToe",
@@ -165,7 +153,7 @@ def main():
                     "truncation": Value("bool"),
                     "started": Value("bool"),
                 },
-                "images": Image(),
+                "images": Sequence(Image()),
             }
         ),
         num_proc=cpus,
