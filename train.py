@@ -3,7 +3,7 @@ import numpy as np
 import os
 from pettingzoo.classic import tictactoe_v3
 from datasets import Dataset, Features, Value, Image, Version, Sequence
-from tqdm import tqdm
+
 
 def main():
     # Game rounds
@@ -44,14 +44,14 @@ def main():
             env.reset()
 
             # Run the game loop
-            for agent in tqdm(env.agent_iter(), desc="Playing Tic Tac Toe"):
+            for agent in env.agent_iter():
                 observation, reward, termination, truncation, _ = env.last()
                 state = observation['observation']
                 mask = observation["action_mask"]
 
                 # Render the current frame
                 frame = env.render()
-                frame = np.asarray([frame], dtype=np.uint8)
+                frame = np.expand_dims(frame, axis=0)
                 players[agent]['frames'].append(frame)
 
                 # Is the game finished?
@@ -112,6 +112,8 @@ def main():
                 # Is the game started?
                 if action is not None:
                     players[agent]['started'].append(False)
+
+            print(f"GameID {shard}: Finish player {selected_player} with reward {players[selected_player]['reward'][-1]}")
 
             for step in range(
                 len(players[selected_player]['state'])
