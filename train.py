@@ -156,7 +156,7 @@ def main():
                 "images": Sequence(Image()),
             }
         ),
-        num_proc=8,
+        num_proc=32,
         gen_kwargs={"shards": shards},
     )
 
@@ -171,7 +171,7 @@ def main():
     # Save the dataset
     dataset.save_to_disk(
         "/mnt/project/perun2601343/tictactoe/dataset",
-        num_proc=8,
+        num_proc=32,
     )
 
 if __name__ == "__main__":
