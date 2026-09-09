@@ -24,7 +24,7 @@ for row in ds:
     print(f"Action Mask:\n{row['messages']['action_mask']}")
 
     # Convert to BGR format for OpenCV
-    frame = cv2.cvtColor(np.asarray(row['images']), cv2.COLOR_RGB2BGR)
+    frame = cv2.cvtColor(np.asarray(row['images'][0]), cv2.COLOR_RGB2BGR)
 
     # Add text to the frame
     cv2.putText(
