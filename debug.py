@@ -23,82 +23,93 @@ for row in ds:
     print(f"State:\n{row['messages']['state']}")
     print(f"Action Mask:\n{row['messages']['action_mask']}")
 
-    # Convert to BGR format for OpenCV
-    frame = cv2.cvtColor(np.asarray(row['images'][0]), cv2.COLOR_RGB2BGR)
+    for frame_id, img in enumerate(row['images']):
+        # Convert to BGR format for OpenCV
+        frame = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
 
-    # Add text to the frame
-    cv2.putText(
-        frame,
-        f"Game: {row['messages']['game']}",
-        (40, 70),
-        cv2.FONT_HERSHEY_DUPLEX,
-        0.8,
-        (234, 232, 233),
-        2,
-        cv2.LINE_AA,
-    )
-    cv2.putText(
-        frame,
-        f"Agent: {row['messages']['name']}",
-        (40, 100),
-        cv2.FONT_HERSHEY_DUPLEX,
-        0.8,
-        (234, 232, 233),
-        2,
-        cv2.LINE_AA,
-    )
-    cv2.putText(
-        frame,
-        f"Action: {row['messages']['action']}",
-        (40, 130),
-        cv2.FONT_HERSHEY_DUPLEX,
-        0.8,
-        (234, 232, 233),
-        2,
-        cv2.LINE_AA,
-    )
-    cv2.putText(
-        frame,
-        f"Reward: {row['messages']['reward']}",
-        (40, 160),
-        cv2.FONT_HERSHEY_DUPLEX,
-        0.8,
-        (234, 232, 233),
-        2,
-        cv2.LINE_AA,
-    )
-    cv2.putText(
-        frame,
-        f"Started: {row['messages']['started']}",
-        (40, 190),
-        cv2.FONT_HERSHEY_DUPLEX,
-        0.8,
-        (234, 232, 233),
-        2,
-        cv2.LINE_AA,
-    )
-    cv2.putText(
-        frame,
-        f"Termination: {row['messages']['termination']}",
-        (40, 220),
-        cv2.FONT_HERSHEY_DUPLEX,
-        0.8,
-        (234, 232, 233),
-        2,
-        cv2.LINE_AA,
-    )
-    cv2.putText(
-        frame,
-        f"Truncation: {row['messages']['truncation']}",
-        (40, 250),
-        cv2.FONT_HERSHEY_DUPLEX,
-        0.8,
-        (234, 232, 233),
-        2,
-        cv2.LINE_AA,
-    )
+        # Add text to the frame
+        cv2.putText(
+            frame,
+            f"Game: {row['messages']['game']}",
+            (40, 70),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            f"Agent: {row['messages']['name']}",
+            (40, 100),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            f"Action: {row['messages']['action']}",
+            (40, 130),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            f"Reward: {row['messages']['reward']}",
+            (40, 160),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            f"Started: {row['messages']['started']}",
+            (40, 190),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            f"Termination: {row['messages']['termination']}",
+            (40, 220),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            f"Truncation: {row['messages']['truncation']}",
+            (40, 250),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            f"FrameID: {frame_id}",
+            (40, 280),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
 
-    # Write the frame to the video
-    video_out.write(frame)
+        # Write the frame to the video
+        video_out.write(frame)
 
 video_out.release()
