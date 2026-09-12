@@ -137,6 +137,7 @@ def main():
                         "termination": players[selected_player]['termination'][step],
                         "truncation": players[selected_player]['truncation'][step],
                         "started": players[selected_player]['started'][step],
+                        "img_embed": None,  # Placeholder for image embeddings
                     },
                     "images": players[selected_player]['frames'][step],
                 }
@@ -161,6 +162,7 @@ def main():
                     "termination": Value("bool"),
                     "truncation": Value("bool"),
                     "started": Value("bool"),
+                    "img_embed": Sequence(Sequence(Value("float32"))),
                 },
                 "images": Sequence(Image()),
             }
