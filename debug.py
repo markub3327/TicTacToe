@@ -100,8 +100,18 @@ for row in ds:
         )
         cv2.putText(
             frame,
-            f"FrameID: {frame_id}",
+            f"Draw: {row['messages']['draw']}",
             (40, 280),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.8,
+            (234, 232, 233),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            f"FrameID: {frame_id}",
+            (40, 310),
             cv2.FONT_HERSHEY_DUPLEX,
             0.8,
             (234, 232, 233),

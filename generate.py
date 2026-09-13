@@ -66,11 +66,14 @@ def main():
                 if termination or truncation:
                     action = None
                     # Select the winner
-                    if reward == 1:
+                    if reward == 1.0:
                         selected_player = agent
+                    elif reward == -1.0:
+                        losing_player = agent
                     # Randomly select a player if the game is a draw
-                    elif reward == 0:
+                    else reward == 0.0:
                         selected_player = random.choice(['player_1', 'player_2'])
+                        losing_player = None
                 else:
                     action = env.action_space(agent).sample(mask)
 
@@ -121,11 +124,22 @@ def main():
                 if action is not None:
                     players[agent]['started'].append(False)
 
-            print(f"GameID {shard}: Finish player {selected_player} with reward {players[selected_player]['reward'][-1]}")
+            print(
+                f"GameID {shard}: Player {selected_player} finished ",
+                f"with reward {players[selected_player]['reward'][-1]}, and ",
+                f"losing player: {losing_player}"
+            )
 
+            # Yield examples for the selected player
             for step in range(
                 len(players[selected_player]['state'])
             ):
+                # Determine if the game ended in a draw
+                if players[selected_player]['termination'][step] and players[selected_player]['reward'][step] == 0.0:
+                    draw = True
+                else:
+                    draw = False
+
                 example = {
                     "messages": {
                         "game": "TicTacToe",
@@ -134,12 +148,34 @@ def main():
                         "action_mask": players[selected_player]['mask'][step],
                         "action": str(players[selected_player]['action'][step]),
                         "reward": players[selected_player]['reward'][step],
+                        "draw": draw,
                         "termination": players[selected_player]['termination'][step],
                         "truncation": players[selected_player]['truncation'][step],
                         "started": players[selected_player]['started'][step],
                         "img_embed": None,  # Placeholder for image embeddings
                     },
                     "images": players[selected_player]['frames'][step],
+                }
+
+                yield example
+
+            # Yield examples for the losing player if applicable
+            if losing_player is not None:
+                example = {
+                    "messages": {
+                        "game": "TicTacToe",
+                        "name": players[selected_player]['name'],
+                        "state": players[selected_player]['state'][-1],
+                        "action_mask": players[selected_player]['mask'][-1],
+                        "action": str(players[selected_player]['action'][-1]),
+                        "reward": players[selected_player]['reward'][-1],
+                        "draw": False,
+                        "termination": players[selected_player]['termination'][-1],
+                        "truncation": players[selected_player]['truncation'][-1],
+                        "started": players[selected_player]['started'][-1],
+                        "img_embed": None,  # Placeholder for image embeddings
+                    },
+                    "images": players[selected_player]['frames'][-1],
                 }
 
                 yield example
@@ -159,6 +195,7 @@ def main():
                     "action_mask": Value("string"),
                     "action": Value("string"),
                     "reward": Value("float32"),
+                    "draw": Value("bool"),
                     "termination": Value("bool"),
                     "truncation": Value("bool"),
                     "started": Value("bool"),
