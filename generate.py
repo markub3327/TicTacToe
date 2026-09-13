@@ -164,18 +164,18 @@ def main():
                 example = {
                     "messages": {
                         "game": "TicTacToe",
-                        "name": players[selected_player]['name'],
-                        "state": players[selected_player]['state'][-1],
-                        "action_mask": players[selected_player]['mask'][-1],
-                        "action": str(players[selected_player]['action'][-1]),
-                        "reward": players[selected_player]['reward'][-1],
+                        "name": players[losing_player]['name'],
+                        "state": players[losing_player]['state'][-1],
+                        "action_mask": players[losing_player]['mask'][-1],
+                        "action": str(players[losing_player]['action'][-1]),
+                        "reward": players[losing_player]['reward'][-1],
                         "draw": False,
-                        "termination": players[selected_player]['termination'][-1],
-                        "truncation": players[selected_player]['truncation'][-1],
-                        "started": players[selected_player]['started'][-1],
+                        "termination": players[losing_player]['termination'][-1],
+                        "truncation": players[losing_player]['truncation'][-1],
+                        "started": players[losing_player]['started'][-1],
                         "img_embed": None,  # Placeholder for image embeddings
                     },
-                    "images": players[selected_player]['frames'][-1],
+                    "images": players[losing_player]['frames'][-1],
                 }
 
                 yield example
