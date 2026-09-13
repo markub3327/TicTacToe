@@ -71,7 +71,7 @@ def main():
                     elif reward == -1.0:
                         losing_player = agent
                     # Randomly select a player if the game is a draw
-                    else reward == 0.0:
+                    else:
                         selected_player = random.choice(['player_1', 'player_2'])
                         losing_player = None
                 else:
