@@ -152,6 +152,7 @@ def main():
                         "termination": players[selected_player]['termination'][step],
                         "truncation": players[selected_player]['truncation'][step],
                         "started": players[selected_player]['started'][step],
+                        "lives": None,  # Placeholder for lives
                         "img_embed": None,  # Placeholder for image embeddings
                     },
                     "images": players[selected_player]['frames'][step],
@@ -173,6 +174,7 @@ def main():
                         "termination": players[losing_player]['termination'][-1],
                         "truncation": players[losing_player]['truncation'][-1],
                         "started": players[losing_player]['started'][-1],
+                        "lives": None,  # Placeholder for lives
                         "img_embed": None,  # Placeholder for image embeddings
                     },
                     "images": players[losing_player]['frames'][-1],
@@ -199,6 +201,7 @@ def main():
                     "termination": Value("bool"),
                     "truncation": Value("bool"),
                     "started": Value("bool"),
+                    "lives": Value("int32"),
                     "img_embed": Sequence(Sequence(Value("float32"))),
                 },
                 "images": Sequence(Image()),
