@@ -77,16 +77,16 @@ def main():
 
                 # Encode the action mask
                 grid = action_mask.reshape(3, 3).T        
-                action_mask = "+" + ("-" * 7 + "+") * 3 + "\n"
+                mask = "+" + ("-" * 7 + "+") * 3 + "\n"
                 for i, row in enumerate(grid):
-                    action_mask += "| "
+                    mask += "| "
                     for col in row:
                         if col:
-                            action_mask += "True" + "  | "
+                            mask += "True" + "  | "
                         else:
-                            action_mask += "False" + " | "
-                    action_mask += "\n" + "+" + ("-" * 7 + "+") * 3 + "\n"
-                players[agent]['action_mask'].append(action_mask)
+                            mask += "False" + " | "
+                    mask += "\n" + "+" + ("-" * 7 + "+") * 3 + "\n"
+                players[agent]['action_mask'].append(mask)
 
                 # Render the current frame
                 frame = env.render()
