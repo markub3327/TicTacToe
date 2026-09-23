@@ -16,7 +16,7 @@ video_out = cv2.VideoWriter(
 
 for row in ds:
     # Print the current agent's name
-    print(f"State:\n{row['messages']['state']}")
+    print(f"Observation:\n{row['messages']['observation']}")
     print(f"Action Mask:\n{row['messages']['action_mask']}")
 
     for frame_id, img in enumerate(row['images']):
@@ -66,7 +66,7 @@ for row in ds:
         )
         cv2.putText(
             frame,
-            f"Started: {row['messages']['started']}",
+            f"Status: {row['messages']['status']}",
             (40, 190),
             cv2.FONT_HERSHEY_DUPLEX,
             0.8,
@@ -76,38 +76,8 @@ for row in ds:
         )
         cv2.putText(
             frame,
-            f"Termination: {row['messages']['termination']}",
-            (40, 220),
-            cv2.FONT_HERSHEY_DUPLEX,
-            0.8,
-            (234, 232, 233),
-            2,
-            cv2.LINE_AA,
-        )
-        cv2.putText(
-            frame,
-            f"Truncation: {row['messages']['truncation']}",
-            (40, 250),
-            cv2.FONT_HERSHEY_DUPLEX,
-            0.8,
-            (234, 232, 233),
-            2,
-            cv2.LINE_AA,
-        )
-        cv2.putText(
-            frame,
-            f"Draw: {row['messages']['draw']}",
-            (40, 280),
-            cv2.FONT_HERSHEY_DUPLEX,
-            0.8,
-            (234, 232, 233),
-            2,
-            cv2.LINE_AA,
-        )
-        cv2.putText(
-            frame,
             f"FrameID: {frame_id}",
-            (40, 310),
+            (40, 220),
             cv2.FONT_HERSHEY_DUPLEX,
             0.8,
             (234, 232, 233),
