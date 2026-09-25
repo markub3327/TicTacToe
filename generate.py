@@ -7,7 +7,7 @@ from collections import deque
 
 
 # Metadata
-NUM_GAMES = 10_000
+NUM_GAMES = 10_000  # Total number of games to generate
 
 
 def main():
@@ -191,7 +191,7 @@ def main():
                 "images": Sequence(Image()),
             }
         ),
-        num_proc=64,
+        num_proc=32,
         gen_kwargs={"shards": shards},
     )
 
@@ -223,7 +223,7 @@ def main():
     # Save the dataset
     dataset.save_to_disk(
         "/mnt/project/perun2601343/tictactoe/dataset",
-        num_proc=64,
+        num_proc=32,
     )
 
 if __name__ == "__main__":
