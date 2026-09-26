@@ -7,7 +7,7 @@ from collections import deque
 
 
 # Metadata
-NUM_GAMES = 10_000  # Total number of games to generate
+NUM_GAMES = 1_000_000  # Total number of games to generate
 
 
 def main():
