@@ -93,30 +93,27 @@ def main():
                 # Is the game finished?
                 if terminated or truncated:
                     action = None
-                    if truncated:
-                        status = 5
+                    # Select the winner
+                    if reward == 1.0:
+                        selected_player = agent
+                        status = 2
+                    # Select the loser
+                    elif reward == -1.0:
+                        losing_player = agent
+                        status = 3
+                    # Randomly select a player if the game is a draw
                     else:
-                        # Select the winner
-                        if reward == 1.0:
-                            selected_player = agent
-                            status = 2
-                        # Select the loser
-                        elif reward == -1.0:
-                            losing_player = agent
-                            status = 3
-                        # Randomly select a player if the game is a draw
-                        else:
-                            selected_player = random.choice(['player_1', 'player_2'])
-                            losing_player = None
-                            status = 4
-                    players[agent]['status'].append(status)
+                        selected_player = random.choice(['player_1', 'player_2'])
+                        losing_player = None
+                        status = 4
                 else:
                     action = env.action_space(agent).sample(action_mask)
                     if len(players[agent]["status"]) == 0:
-                        players[agent]["status"].append(1)
+                        status = 1
                     else:
-                        players[agent]["status"].append(0)
-    
+                        status = 0
+
+                players[agent]['status'].append(status)
                 players[agent]['action'].append(action)
 
                 # Step the environment with the selected action
