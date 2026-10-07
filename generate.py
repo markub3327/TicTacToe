@@ -188,7 +188,7 @@ def main():
                 "images": Sequence(Image()),
             }
         ),
-        num_proc=64,
+        num_proc=32,
         gen_kwargs={"shards": shards},
     )
 
