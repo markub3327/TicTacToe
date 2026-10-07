@@ -219,6 +219,11 @@ def main():
         else:
             print(f"Duplicate observation found for {i} sample!")
     dataset = dataset.select(list(keep_indices.values()))
+    print("Total samples:", len(dataset))
+
+    # Shuffle the dataset once before saving
+    dataset = dataset.shuffle()
+    print(f"Dataset shuffled!")
 
     # Save the dataset
     dataset.save_to_disk(
