@@ -202,10 +202,18 @@ def main():
 
     # Remove duplicate samples based on their hash
     keep_indices = {}
-    for i, obs in enumerate(dataset["messages"]["observation"]):
+    for i, (obs, reward) in enumerate(zip(
+            dataset["messages"]["observation"],
+            dataset["messages"]["reward"],
+            strict=True,
+    )):
         h = hashlib.sha3_512(obs.encode("utf-8")).hexdigest()
-        if h not in keep_indices:
-            keep_indices[h] = i
+        if reward == -1.0:
+            key = f"lose_{h}"
+        else:
+            key = h
+        if key not in keep_indices:
+            keep_indices[key] = i
         else:
             print(f"Duplicate observation found for {i} sample!")
     dataset = dataset.select(list(keep_indices.values()))
