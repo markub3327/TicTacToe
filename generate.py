@@ -125,9 +125,7 @@ def dataset_generator(shards):
         )
 
         # Yield examples for the selected player
-        for step in range(
-            len(players[selected_player]['frames'])
-        ):
+        for step in range(len(players[selected_player]['frames'])):
             example = {
                 "messages": {
                     "game": "TicTacToe",
