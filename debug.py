@@ -2,10 +2,19 @@ import datetime
 import cv2
 import numpy as np
 from datasets import load_from_disk
+from collections import Counter
 
 # Load the dataset from disk
 ds = load_from_disk("./dataset")
-print(f"Size of dataset for {env_name}: {len(ds)}")
+print(f"Size of dataset: {len(ds)}")
+
+# Get the count of samples for each status in the dataset
+status_counts = Counter(row['messages']['status'] for row in ds)
+print(f"Status counts: {status_counts}")
+
+# Get the count of samples for each reward in the dataset
+reward_counts = Counter(row['messages']['reward'] for row in ds)
+print(f"Reward counts: {reward_counts}\n")
 
 # Create a video writer object to save the frames as a video
 video_out = cv2.VideoWriter(
