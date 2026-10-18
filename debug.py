@@ -5,6 +5,7 @@ from datasets import load_from_disk
 
 # Load the dataset from disk
 ds = load_from_disk("./dataset")
+print(f"Size of dataset for {env_name}: {len(ds)}")
 
 # Create a video writer object to save the frames as a video
 video_out = cv2.VideoWriter(
