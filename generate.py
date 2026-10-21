@@ -7,7 +7,7 @@ from collections import deque
 
 
 # Metadata
-NUM_GAMES = 100_000  # Total number of games to generate
+NUM_GAMES = 250_000  # Total number of games to generate
 
 
 def dataset_generator(shards):

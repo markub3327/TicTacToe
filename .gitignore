@@ -1,7 +1,9 @@
 videos/
 
-dataset/
+dataset*/
 
 logs/
 
 slurm.sh
+
+*.txt
