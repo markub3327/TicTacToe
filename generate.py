@@ -135,7 +135,6 @@ def dataset_generator(shards):
                     "action": str(players[selected_player]['action'][step]),
                     "reward": players[selected_player]['reward'][step],
                     "status": players[selected_player]['status'][step],
-                    "lives": None,  # Placeholder for lives
                     "frames_similarity": None,  # Placeholder for image embeddings
                     "info": None,  # Placeholder for additional info
                 },
@@ -154,7 +153,6 @@ def dataset_generator(shards):
                     "action": str(players[losing_player]['action'][-1]),
                     "reward": players[losing_player]['reward'][-1],
                     "status": players[losing_player]['status'][-1],
-                    "lives": None,  # Placeholder for lives
                     "frames_similarity": None,  # Placeholder for image embeddings
                     "info": None,  # Placeholder for additional info
                 },
@@ -179,7 +177,6 @@ def main():
                     "action": Value("string"),
                     "reward": Value("float32"),
                     "status": Value("int32"),
-                    "lives": Value("int32"),
                     "frames_similarity": Sequence(Sequence(Value("float32"))),
                     "info": Value("string"),
                 },
